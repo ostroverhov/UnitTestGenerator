@@ -6,6 +6,7 @@ import org.gradle.api.provider.ListProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.CacheableTask;
 import org.gradle.api.tasks.Input;
+import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.TaskAction;
 
@@ -54,6 +55,7 @@ public class GenerateUnitTestsTask extends DefaultTask {
         return model;
     }
 
+    @Internal
     public Property<File> getOutputDir() {
         return outputDir;
     }
@@ -61,6 +63,7 @@ public class GenerateUnitTestsTask extends DefaultTask {
     /**
      * Resolves target class FQNs to source files. Used for task inputs.
      */
+    @Internal
     public List<File> getSourceFiles() {
         if (!targetClasses.isPresent()) {
             return Collections.emptyList();
@@ -76,6 +79,7 @@ public class GenerateUnitTestsTask extends DefaultTask {
     /**
      * Effective output directory: from extension or default src/test/java|kotlin by language.
      */
+    @Internal
     public File getEffectiveOutputDir() {
         if (outputDir.isPresent()) {
             return outputDir.get();
