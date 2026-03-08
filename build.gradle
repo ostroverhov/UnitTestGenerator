@@ -1,0 +1,44 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly gradleApi()
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.3'
+}
+
+gradlePlugin {
+    plugins {
+        unitTestGenerator {
+            id = 'com.example.unit-test-generator'
+            implementationClass = 'com.example.unittestgenerator.UnitTestGeneratorPlugin'
+        }
+    }
+}
+
+publishing {
+    repositories {
+        mavenLocal()
+        maven {
+            url = layout.buildDirectory.dir("local-repo")
+        }
+    }
+    publications {
+        maven(MavenPublication) {
+            groupId = project.group
+            artifactId = 'unit-test-generator'
+            version = project.version
+            from components.java
+        }
+    }
+}
