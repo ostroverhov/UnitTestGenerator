@@ -25,7 +25,7 @@ public class UnitTestGeneratorPlugin implements Plugin<Project> {
             task.getTestFramework().set(extension.getTestFramework());
             task.getModel().set(extension.getModel());
             task.getOutputDir().set(extension.getOutputDir());
-            task.getOutputDirectory().fileValue(project.provider(() -> task.getEffectiveOutputDir()));
+            task.getOutputDirectory().set(project.getLayout().dir(project.provider(() -> task.getEffectiveOutputDir())));
             task.getInputs().files(project.provider(() -> task.getSourceFiles()));
         });
     }
