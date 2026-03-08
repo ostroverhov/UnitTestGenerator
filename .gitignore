@@ -1,1 +1,32 @@
-.idea
+# Gradle
+.gradle/
+build/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+.vscode/
+*.code-workspace
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+hs_err_pid*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local
+*.log
+local-repo/
+
+# Env / secrets (do not commit API keys)
+.env
+.env.local
+*.local
